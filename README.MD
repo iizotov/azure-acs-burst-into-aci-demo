@@ -24,6 +24,8 @@ This demo will provision a k8s cluster using ACS, enable the ACI connector, depl
 * Wait (can take up to 10 minutes)
 * Using your browser navigate to the [k8s management ui](http://127.0.0.1:8001/ui) and observe how it will deplete the ACS agent node capacity first and then start deploying new pods as ACI instances (use the [Azure Portal](https://portal.azure.com) to observe)
   > You can also run `kubectl get deployment` and `kubectl get pod` to observe the behaviour 
+
+  > Also, try manually deploying the connector (`./aci-connector.yaml`) and the stress container (`./deploy-stres.yaml`) either via the ui or using `kubectl create -f ...` command
 * Don't forget to tear down the Resource Groups (there'll be two) created by this script
 
 ## Built With
