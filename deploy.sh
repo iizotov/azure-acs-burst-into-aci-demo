@@ -94,9 +94,11 @@ until kubectl create -f ./aci-connector.yaml; do
 	echo "sleeping for 5 seconds and repeating..."
 	sleep 5
 done
+sleep 30
 
 echo "Deploying ${IMAGE}"
 kubectl create -f ./deploy-stress.yaml
+sleep 30
 
 echo 'Deploying horizontal autoscaler (50% CPU target, between 1 to 10 pods)'
 until kubectl autoscale deployment stress --cpu-percent=50 --min=1 --max=10; do 
