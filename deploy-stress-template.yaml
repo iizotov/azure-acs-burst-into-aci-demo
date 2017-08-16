@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name:  stress
+  labels:
+    name:  stress
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name:  stress
+    spec:
+      containers:
+      - image:  ${IMAGE}
+        args: ["--cpu", "4", "--io", "2", "--vm", "2"]
+        name:  stress
+        resources:
+          requests:
+            cpu: 0.2
+        imagePullPolicy: Always
+      tolerations:
+      - key: azure.com/aci
+        effect: NoSchedule
