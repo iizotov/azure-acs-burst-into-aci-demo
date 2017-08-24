@@ -37,7 +37,6 @@ read -p "Please enter how many k8s agent nodes you'd like [${AGENT_COUNT_DEFAULT
 AGENT_COUNT="${AGENT_COUNT:-$AGENT_COUNT_DEFAULT}"
 
 ACS_NAME="acs"${SEED}
-DNS_NAME="acs"${SEED}
 MASTER_COUNT=1
 
 if [ -z "$CLIENT_ID" ]
@@ -62,8 +61,8 @@ until az group create --name "${RESOURCE_GROUP}" --location "${LOCATION}"; do
 done
 
 echo "Creating ACS k8s instance..."
-until az acs create --name "${ACS_NAME}" --dns-prefix "${DNS_NAME}" \
-	--resource-group "${RESOURCE_GROUP}" --admin-username "${DNS_NAME}" \
+until az acs create --name "${ACS_NAME}" \
+	--resource-group "${RESOURCE_GROUP}" \
 	--generate-ssh-keys --orchestrator-type kubernetes \
 	--master-count "${MASTER_COUNT}" --agent-count "${AGENT_COUNT}" \
 	--agent-vm-size "${AGENT_VM}" --service-principal "${CLIENT_ID}" \
